@@ -15,7 +15,7 @@ export default function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/shop' element={<ShopPage />} />
-        <Route path='/shop/5' element={<SingleItemPage />} />
+        <Route path='/shop/:itemId' element={<SingleItemPage />} />
       </Routes>
     </div>
   );

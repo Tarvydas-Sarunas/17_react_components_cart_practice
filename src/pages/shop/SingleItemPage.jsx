@@ -1,5 +1,13 @@
 import React from 'react';
 
 export default function SingleItemPage() {
-  return <div>SingleItemPage</div>;
+  return (
+    <div className='container text-center'>
+      <h1 className='mt-5 text-3xl'>Single item</h1>
+      <p className='text-lg'>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias,
+        nostrum.
+      </p>
+    </div>
+  );
 }

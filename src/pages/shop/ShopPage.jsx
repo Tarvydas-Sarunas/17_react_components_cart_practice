@@ -33,7 +33,7 @@ export default function ShopPage() {
         nostrum.
       </p>
 
-      <ul className='grid grid-cols-3'>
+      <ul className='grid grid-cols-3 gap-1'>
         {productArr.map((pObj) => (
           <li key={pObj.id}>
             <ShopListItem item={pObj} />
