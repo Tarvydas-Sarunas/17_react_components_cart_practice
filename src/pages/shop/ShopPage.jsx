@@ -7,6 +7,28 @@ import ShopListItem from '../../components/shop/ShopListItem';
 
 export default function ShopPage() {
   const [productArr, setProductArr] = useState([]);
+  const [cartArr, setCartArr] = useState([]);
+
+  const cartObj = {
+    cItemId: 1,
+    prodId: 1,
+    title: 'Iphone',
+    qty: 1,
+    price: 799,
+  };
+
+  const addToCard = () => {
+    // ideti objekta i cartArr (simple)
+    // jei jau yra toks objektas carte - padidinti qty
+  };
+
+  const updateQtyCard = () => {
+    // tures atnaujinti skaiciu qty kazkuriam objekte
+  };
+
+  const removeFromCard = () => {
+    // pasalinti obj is cardArr masyvo
+  };
 
   useEffect(() => {
     getApiData();
@@ -32,6 +54,12 @@ export default function ShopPage() {
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias,
         nostrum.
       </p>
+
+      <ul>
+        {cartArr.map((cObj) => (
+          <li key={cObj.cId}>Cart item</li>
+        ))}
+      </ul>
 
       <ul className='grid grid-cols-3 gap-1'>
         {productArr.map((pObj) => (

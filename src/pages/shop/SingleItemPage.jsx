@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function SingleItemPage() {
   return (
     <div className='container text-center'>

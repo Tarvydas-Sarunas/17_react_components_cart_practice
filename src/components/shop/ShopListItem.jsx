@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../../ui/Button';
 
 export default function ShopListItem({ item }) {
   return (
@@ -23,8 +24,9 @@ export default function ShopListItem({ item }) {
         {/* eina SingleItemPage  */}
         <div className='flex gap-2 my-5 place-items-start'>
           <Link className=' inline-block' to={`/shop/${item.id}`}>
-            Read More
+            <Button>Read More</Button>
           </Link>
+          <Button outline>Add to cart</Button>
         </div>
       </div>
     </div>
