@@ -2,10 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 import { v4 as genId } from 'uuid';
 import CartItem from '../components/cart/CartItem';
+import { useCartCtx } from './store/CartProvider';
 
 export default function CartPage() {
   const [cartArr, setCartArr] = useState([]);
   console.table(cartArr);
+
+  const cartCtx = useCartCtx();
 
   const cartObj = {
     cItemId: 1,
@@ -85,6 +88,8 @@ export default function CartPage() {
     <div className='container text-center'>
       <h1 className='mt-5 text-3xl'>Cart</h1>
       <p className='text-lg'>Buy Now and More</p>
+
+      <button onClick={cartCtx.remove}>Remove</button>
 
       {cartArr.length !== 0 && (
         <ul className='my-10'>

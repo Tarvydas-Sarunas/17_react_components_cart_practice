@@ -1,7 +1,3 @@
-import axios from 'axios';
-import React from 'react';
-import { useEffect } from 'react';
-
 export default function HomePage() {
   return (
     <div className='container text-center'>

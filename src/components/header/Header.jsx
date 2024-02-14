@@ -1,6 +1,6 @@
-import React from 'react';
 import { PiShoppingCartThin } from 'react-icons/pi';
 import { Link, NavLink } from 'react-router-dom';
+import { useCartCtx } from '../../pages/store/CartProvider';
 
 export default function Header() {
   return (

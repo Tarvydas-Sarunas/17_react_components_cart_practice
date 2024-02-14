@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from '../../ui/Button';
-import { localProductsUrl } from '../../config';
+import { useCartCtx } from '../store/CartProvider';
 
 export default function SingleItemPage() {
   const [singleItemObj, setSingleItemObj] = useState({});

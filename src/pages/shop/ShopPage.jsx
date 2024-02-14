@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { localProductsUrl, productsUrl } from '../../config';
-import { json } from 'react-router-dom';
+import { localProductsUrl } from '../../config';
 import ShopListItem from '../../components/shop/ShopListItem';
+import { useCartCtx } from '../store/CartProvider';
 
 export default function ShopPage() {
   const [productArr, setProductArr] = useState([]);
+
+  const cartCtx = useCartCtx();
+  console.log('cartCtx ===', cartCtx);
 
   useEffect(() => {
     getApiData();
@@ -35,7 +38,7 @@ export default function ShopPage() {
       <ul className='grid grid-cols-3 gap-1'>
         {productArr.map((pObj) => (
           <li key={pObj.id}>
-            <ShopListItem item={pObj} onAddToCard={() => {} /*addToCart*/} />
+            <ShopListItem item={pObj} onAddToCard={() => cartCtx.add(pObj)} />
           </li>
         ))}
       </ul>
