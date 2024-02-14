@@ -1,4 +1,5 @@
 import React from 'react';
+import { PiShoppingCartThin } from 'react-icons/pi';
 import { Link, NavLink } from 'react-router-dom';
 
 export default function Header() {
@@ -26,6 +27,12 @@ export default function Header() {
             to={'/shop'}
           >
             Shop
+          </NavLink>
+          <NavLink
+            className='text-lg p-3 hover:bg-slate-700 hover:text-white flex gap-2'
+            to={'/cart'}
+          >
+            <PiShoppingCartThin size={'25px'} />
           </NavLink>
         </nav>
       </div>
