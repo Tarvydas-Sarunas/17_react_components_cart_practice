@@ -91,7 +91,7 @@ export default function CartPage() {
 
       <button onClick={cartCtx.remove}>Remove</button>
 
-      {cartArr.length !== 0 && (
+      {cartCtx.cart.length !== 0 && (
         <ul className='my-10'>
           <li className='mb-10'>
             <div className='grid grid-cols-5 text-center'>
@@ -103,7 +103,7 @@ export default function CartPage() {
             </div>
           </li>
 
-          {cartArr.map((cObj) => (
+          {cartCtx.cart.map((cObj) => (
             <li key={cObj.cItemId}>
               <CartItem item={cObj} onRemoveFromCart={removeFromCart} />
             </li>
