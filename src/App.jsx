@@ -1,9 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import ShopPage from './pages/shop/ShopPage';
-import SingleItemPage from './pages/shop/SingleItemPage';
+
 import HomePage from './pages/HomePage';
 import Header from './components/header/Header';
+import SingleItemPage from './pages/shop/SingleItemPage';
 
 export default function App() {
   console.log('App susikure');

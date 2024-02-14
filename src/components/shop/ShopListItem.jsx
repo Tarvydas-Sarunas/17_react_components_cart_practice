@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../ui/Button';
+import { PiShoppingCartThin } from 'react-icons/pi';
+import { FaBookReader } from 'react-icons/fa';
 
-export default function ShopListItem({ item }) {
+export default function ShopListItem({ item, onAddToCard }) {
   return (
     <div className='border shadow-md'>
       <Link
@@ -24,9 +26,17 @@ export default function ShopListItem({ item }) {
         {/* eina SingleItemPage  */}
         <div className='flex gap-2 my-5 place-items-start'>
           <Link className=' inline-block' to={`/shop/${item.id}`}>
-            <Button>Read More</Button>
+            <Button className='flex justify-center gap-1'>
+              Read More <FaBookReader />
+            </Button>
           </Link>
-          <Button outline>Add to cart</Button>
+          <Button
+            outline
+            className='flex justify-center gap-1'
+            onClick={() => onAddToCard(item.id)}
+          >
+            Add to <PiShoppingCartThin size={'25px'} />
+          </Button>
         </div>
       </div>
     </div>
