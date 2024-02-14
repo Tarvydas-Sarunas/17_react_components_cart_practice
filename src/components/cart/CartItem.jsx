@@ -9,7 +9,12 @@ const cartItem = {
   img: 'blalal.jpg',
 };
 
-export default function CartItem({ item, onRemoveFromCart }) {
+export default function CartItem({
+  item,
+  onRemoveFromCart,
+  onUpdateUp,
+  onUpdateDown,
+}) {
   return (
     <div className='grid grid-cols-5 justify-center items-center text-center border mb-2 py-1 pl-1'>
       <img
@@ -28,13 +33,19 @@ export default function CartItem({ item, onRemoveFromCart }) {
       </div>
 
       <div className='grid grid-cols-3 justify-center'>
-        <button className='justify-self-end border hover:bg-indigo-50 border-indigo-500 rounded-sm w-8 h-8 leading-none text-2xl'>
+        <button
+          onClick={() => onUpdateDown(item.cItemId)}
+          className='justify-self-end border hover:bg-indigo-50 border-indigo-500 rounded-sm w-8 h-8 leading-none text-2xl'
+        >
           -
         </button>
         <p className='w-8 text-center text-xl font-semibold justify-self-center'>
           {item.qty}
         </p>
-        <button className='justify-self-start border hover:bg-indigo-50 border-indigo-500 rounded-sm w-8 h-8 leading-none text-2xl'>
+        <button
+          onClick={() => onUpdateUp(item.cItemId)}
+          className='justify-self-start border hover:bg-indigo-50 border-indigo-500 rounded-sm w-8 h-8 leading-none text-2xl'
+        >
           +
         </button>
       </div>

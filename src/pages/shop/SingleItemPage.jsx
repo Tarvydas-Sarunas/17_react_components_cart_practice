@@ -4,10 +4,14 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from '../../ui/Button';
 import { useCartCtx } from '../store/CartProvider';
+import { PiShoppingCartThin } from 'react-icons/pi';
 
 export default function SingleItemPage() {
   const [singleItemObj, setSingleItemObj] = useState({});
   const [expandedImage, setExpandedImage] = useState(null);
+
+  const { add } = useCartCtx();
+  console.log('cartCtx ===', add);
 
   const { itemId } = useParams();
   console.log('itemId ===', itemId);
@@ -60,12 +64,19 @@ export default function SingleItemPage() {
           <p>Description: {singleItemObj.description}</p>
           <p>Rating: {singleItemObj.rating}</p>
           <p>Price: {singleItemObj.price} €</p>
-          <input
-            className='border w-16 h-11 rounded-l-md border-slate-600 text-xl'
-            type='number'
-            defaultValue={1}
-          />
-          <Button className='rounded-l-none'>Add to cart</Button>
+          <div className='flex items-center mt-4'>
+            <input
+              className='border w-16 h-11 rounded-l-md border-slate-600 text-xl'
+              type='number'
+              defaultValue={1}
+            />
+            <Button
+              onClick={() => add(singleItemObj)}
+              className='rounded-l-none flex justify-center gap-1 mt-0'
+            >
+              Add To <PiShoppingCartThin size={'25px'} />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

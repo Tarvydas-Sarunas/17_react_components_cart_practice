@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useCartCtx } from '../../pages/store/CartProvider';
 
 export default function Header() {
+  const { cart } = useCartCtx();
   return (
     <header className='bg-gray-900 text-white'>
       <div className='container mx-auto flex justify-between items-center'>
@@ -33,6 +34,7 @@ export default function Header() {
             to={'/cart'}
           >
             <PiShoppingCartThin size={'25px'} />
+            {cart?.length > 0 && cart.length}
           </NavLink>
         </nav>
       </div>

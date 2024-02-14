@@ -8,6 +8,8 @@ const CartContext = createContext({
   add(productObj) {},
   remove() {},
   update() {},
+  updateUp() {},
+  updateDown() {},
 });
 
 // persivadinu savo contexta
@@ -52,7 +54,42 @@ const cartReducer = (cartState, action) => {
         return [...cartState, madeObj];
       }
       return cartState;
-
+    case 'REMOVE':
+      const idToRemove = action.payload;
+      return cartState.filter((cObj) => cObj.cItemId !== idToRemove);
+    case 'UPDATE_UP':
+      console.log('cartState ===', cartState);
+      console.log('update up; ===', action.payload);
+      return cartState.map((cObj) => {
+        if (cObj.cItemId === action.payload) {
+          return {
+            ...cObj,
+            qty: cObj.qty + 1,
+            totalPrice: (cObj.qty + 1) * cObj.price,
+          };
+        } else {
+          return cObj;
+        }
+      });
+    case 'UPDATE_DOWN':
+      console.log('update down; ===', action.payload);
+      const currentQty = cartState.find(
+        (cObj) => cObj.cItemId === action.payload
+      ).qty;
+      if (currentQty <= 0) {
+        return cartState.filter((cObj) => cObj.cItemId !== action.payload);
+      }
+      return cartState.map((cObj) => {
+        if (cObj.cItemId === action.payload) {
+          return {
+            ...cObj,
+            qty: cObj.qty - 1,
+            totalPrice: (cObj.qty - 1) * cObj.price,
+          };
+        } else {
+          return cObj;
+        }
+      });
     default:
       console.warn('no action found', action);
       return cartState;
@@ -71,13 +108,42 @@ export default function CartProvider({ children }) {
   };
 
   const remove = (idToRemove) => {
-    console.log('remove item in cart ===');
+    console.log('remove item in cart ===', idToRemove);
+    dispach({
+      type: 'REMOVE',
+      payload: idToRemove,
+    });
+  };
+
+  // const update = (idToUpdate, direction) => {
+  //   console.log('updating cart CartProvider ===', idToUpdate);
+  //   dispach({
+  //     type: 'UPDATE',
+  //     payload: { id: idToUpdate, direction: direction },
+  //   });
+  // };
+  // ou
+  const updateUp = (idToUpdate) => {
+    console.log('updating cart CartProvider ===', idToUpdate);
+    dispach({
+      type: 'UPDATE_UP',
+      payload: idToUpdate,
+    });
+  };
+  const updateDown = (idToUpdate) => {
+    console.log('updating cart CartProvider ===', idToUpdate);
+    dispach({
+      type: 'UPDATE_DOWN',
+      payload: idToUpdate,
+    });
   };
 
   const cartCtxValue = {
     cart: cartState,
     add,
     remove,
+    updateUp,
+    updateDown,
   };
 
   return (
