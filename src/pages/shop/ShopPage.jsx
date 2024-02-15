@@ -4,11 +4,15 @@ import { useEffect } from 'react';
 import { localProductsUrl } from '../../config';
 import ShopListItem from '../../components/shop/ShopListItem';
 import { useCartCtx } from '../store/CartProvider';
+import Button from '../../ui/Button';
+
+const url = 'https://dummyjson.com/products';
 
 export default function ShopPage() {
   const [productArr, setProductArr] = useState([]);
   const [catFilterValue, setCatFilterValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
+  const [limit, setLimit] = useState(10);
 
   const cartCtx = useCartCtx();
 
@@ -31,16 +35,24 @@ export default function ShopPage() {
   // ===========
 
   useEffect(() => {
-    getApiData();
-  }, []);
+    getApiData(`${url}?limit=${limit}&skip=10`);
+  }, [limit]);
 
-  const getApiData = () => {
+  const getApiData = (url) => {
     axios
-      .get(localProductsUrl)
+      // kai noriu skipinti ir limitinti per puslapi korteliu
+      .get(url)
+      // .get(localProductsUrl)
       .then((resp) => {
-        const products = resp.data;
+        const products = resp.data.products;
+        console.log('products ===', products);
         setProductArr(products);
       })
+      // .then((resp) => {
+      //   const products = resp.data;
+      //   console.log('products ===', products);
+      //   setProductArr(products);
+      // })
       .catch((error) => {
         console.warn('ivyko klaida:', error);
       });
@@ -58,6 +70,9 @@ export default function ShopPage() {
       )
     : filtered;
 
+  const loadMoreHandler = () => {
+    setLimit(20);
+  };
   return (
     <div className='container'>
       <h1 className='mt-5 text-3xl text-center'>SHOP</h1>
@@ -100,6 +115,13 @@ export default function ShopPage() {
           </li>
         ))}
       </ul>
+      <Button onClick={() => setLimit(20)}>20</Button>
+      <Button onClick={() => setLimit(30)}>30</Button>
+      <Button onClick={() => setLimit(40)}>40</Button>
+      <Button onClick={() => setLimit(50)}>50</Button>
+      <div className='flex gap-2'>
+        <button>Prev</button>1 2 3 4<button>Next</button>
+      </div>
     </div>
   );
 }
