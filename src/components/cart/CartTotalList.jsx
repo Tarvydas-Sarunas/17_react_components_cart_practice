@@ -7,7 +7,6 @@ export default function CartTotalList({ cart }) {
   const totalQuantity = cart.reduce((acc, cObj) => acc + cObj.qty, 0);
   const taxes = subtotal * 0.21;
 
-  console.log('subtotal ===', subtotal);
   return (
     <div className='grid grid-cols-4'>
       <ul className='col-start-4 col-end-4'>

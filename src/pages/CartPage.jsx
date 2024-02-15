@@ -5,7 +5,6 @@ import CartTotalList from '../components/cart/CartTotalList';
 
 export default function CartPage() {
   const { updateUp, updateDown, remove, cart } = useCartCtx();
-  console.log('cart ===', cart);
 
   const cartObj = {
     cItemId: 1,

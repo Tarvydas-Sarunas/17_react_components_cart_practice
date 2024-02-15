@@ -7,10 +7,12 @@ import { useCartCtx } from '../store/CartProvider';
 
 export default function ShopPage() {
   const [productArr, setProductArr] = useState([]);
+  const [filterSelect, setFilterSelect] = useState([]);
 
   const cartCtx = useCartCtx();
-  console.log('cartCtx ===', cartCtx);
 
+  // ===========
+  // paimu tik viena kategorija is daugumos kurios visos kartojasi
   const allCategories = [];
 
   productArr.forEach((pObj) => {
@@ -20,6 +22,13 @@ export default function ShopPage() {
     allCategories.push(pObj.category);
   });
   console.log('allCategories ===', allCategories);
+
+  // variantas 2 su Set geras
+
+  const categoriesWithSet = new Set();
+  productArr.forEach((pObj) => categoriesWithSet.add(pObj.category));
+  console.log('categoriesWithSet ===', categoriesWithSet);
+  // ===========
 
   useEffect(() => {
     getApiData();
@@ -37,6 +46,15 @@ export default function ShopPage() {
       });
   };
 
+  function handleFilter(e) {
+    const filteredValue = productArr.filter(
+      (pObj) => pObj.category === e.target.value
+    );
+    setFilterSelect(filteredValue);
+  }
+
+  const filtered = filterSelect.length > 0 ? filterSelect : productArr;
+
   return (
     <div className='container'>
       <h1 className='mt-5 text-3xl text-center'>SHOP</h1>
@@ -45,14 +63,24 @@ export default function ShopPage() {
         nostrum.
       </p>
 
-      <fieldset>
-        <select name='' id=''>
-          <option value='smartphone'>Smartphone</option>
+      <fieldset className='grid grid-cols-3 mb-5'>
+        <select
+          name=''
+          id=''
+          onChange={handleFilter}
+          className='block w-full py-2 px-3 border border-gray-400 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+        >
+          <option value={''}>All Categories</option>
+          {allCategories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
         </select>
       </fieldset>
 
       <ul className='grid grid-cols-3 gap-1'>
-        {productArr.map((pObj) => (
+        {filtered.map((pObj) => (
           <li key={pObj.id}>
             <ShopListItem item={pObj} onAddToCard={() => cartCtx.add(pObj)} />
           </li>
