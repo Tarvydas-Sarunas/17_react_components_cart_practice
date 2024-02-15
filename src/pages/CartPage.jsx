@@ -26,7 +26,7 @@ export default function CartPage() {
 
       <ul className='my-10'>
         <li className='mb-10'>
-          <div className='grid grid-cols-5 text-center'>
+          <div className='grid grid-cols-5 text-center font-semibold text-lg'>
             <p>Image</p>
             <p>Article title</p>
             <p>Quantity</p>

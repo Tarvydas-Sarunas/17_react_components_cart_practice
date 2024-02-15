@@ -11,6 +11,16 @@ export default function ShopPage() {
   const cartCtx = useCartCtx();
   console.log('cartCtx ===', cartCtx);
 
+  const allCategories = [];
+
+  productArr.forEach((pObj) => {
+    if (allCategories.includes(pObj.category)) {
+      return;
+    }
+    allCategories.push(pObj.category);
+  });
+  console.log('allCategories ===', allCategories);
+
   useEffect(() => {
     getApiData();
   }, []);
@@ -34,6 +44,12 @@ export default function ShopPage() {
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias,
         nostrum.
       </p>
+
+      <fieldset>
+        <select name='' id=''>
+          <option value='smartphone'>Smartphone</option>
+        </select>
+      </fieldset>
 
       <ul className='grid grid-cols-3 gap-1'>
         {productArr.map((pObj) => (

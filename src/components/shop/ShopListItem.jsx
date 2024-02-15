@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../ui/Button';
 import { PiShoppingCartThin } from 'react-icons/pi';
 import { FaBookReader } from 'react-icons/fa';
+import { makePrice } from '../../helper';
 
 export default function ShopListItem({ item, onAddToCard }) {
   return (
@@ -18,7 +19,9 @@ export default function ShopListItem({ item, onAddToCard }) {
       </Link>
       <div className='text-bold text-slate-700 m-3'>
         <h3 className='text-2xl'>{item.title}</h3>
-        <p className='text-gray-400 my-3 font-semibold'>{item.price} €</p>
+        <p className='text-gray-400 my-3 font-semibold'>
+          {makePrice(item.price)}
+        </p>
         <p>
           Category: <span className='font-semibold'>{item.category}</span>
         </p>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { makePrice } from '../../helper';
 
 const cartItem = {
   cItemId: 1,
@@ -49,8 +50,8 @@ export default function CartItem({
           +
         </button>
       </div>
-      <p>{item.price}</p>
-      <p>{item.totalPrice}</p>
+      <p>{makePrice(item.price)}</p>
+      <p>{makePrice(item.totalPrice)}</p>
     </div>
   );
 }
