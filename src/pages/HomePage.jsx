@@ -3,8 +3,8 @@ export default function HomePage() {
     <div className='container text-center'>
       <h1 className='mt-5 text-3xl'>Home</h1>
       <p className='text-lg'>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias,
-        nostrum.
+        Nous sommes ravis de vous accueillir sur notre page expérimentale dédiée
+        au shop et au caddie. Cette fonctionnalité est un test.
       </p>
     </div>
   );

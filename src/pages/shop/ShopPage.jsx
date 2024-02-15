@@ -35,7 +35,7 @@ export default function ShopPage() {
   // ===========
 
   useEffect(() => {
-    getApiData(`${url}?limit=${limit}&skip=10`);
+    getApiData(`${url}?limit=${limit}&skip=0`);
   }, [limit]);
 
   const getApiData = (url) => {
