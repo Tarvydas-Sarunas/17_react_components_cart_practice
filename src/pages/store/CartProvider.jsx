@@ -18,7 +18,6 @@ CartContext.displayName = 'MaCart';
 const cartReducer = (cartState, action) => {
   switch (action.type) {
     case 'ADD':
-      console.log('add to cart in reducer ===', action.payload);
       const productItemToAddObj = action.payload;
       // tikriname ar cart yra toks objektas ant kurio paspausta
       const isInCart = cartState.some(
@@ -50,7 +49,7 @@ const cartReducer = (cartState, action) => {
           img: productItemToAddObj.thumbnail,
           totalPrice: productItemToAddObj.price,
         };
-        console.log('madeObj ===', madeObj);
+
         return [...cartState, madeObj];
       }
       return cartState;
@@ -58,8 +57,6 @@ const cartReducer = (cartState, action) => {
       const idToRemove = action.payload;
       return cartState.filter((cObj) => cObj.cItemId !== idToRemove);
     case 'UPDATE_UP':
-      console.log('cartState ===', cartState);
-      console.log('update up; ===', action.payload);
       return cartState.map((cObj) => {
         if (cObj.cItemId === action.payload) {
           return {
@@ -100,7 +97,6 @@ export default function CartProvider({ children }) {
   const [cartState, dispach] = useReducer(cartReducer, []);
 
   const add = (productObj) => {
-    console.log('adding to cart ===', productObj);
     dispach({
       type: 'ADD',
       payload: productObj,
@@ -124,14 +120,12 @@ export default function CartProvider({ children }) {
   // };
   // ou
   const updateUp = (idToUpdate) => {
-    console.log('updating cart CartProvider ===', idToUpdate);
     dispach({
       type: 'UPDATE_UP',
       payload: idToUpdate,
     });
   };
   const updateDown = (idToUpdate) => {
-    console.log('updating cart CartProvider ===', idToUpdate);
     dispach({
       type: 'UPDATE_DOWN',
       payload: idToUpdate,

@@ -7,7 +7,8 @@ import { useCartCtx } from '../store/CartProvider';
 
 export default function ShopPage() {
   const [productArr, setProductArr] = useState([]);
-  const [filterSelect, setFilterSelect] = useState([]);
+  const [catFilterValue, setCatFilterValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
   const cartCtx = useCartCtx();
 
@@ -21,13 +22,12 @@ export default function ShopPage() {
     }
     allCategories.push(pObj.category);
   });
-  console.log('allCategories ===', allCategories);
 
   // variantas 2 su Set geras
 
   const categoriesWithSet = new Set();
   productArr.forEach((pObj) => categoriesWithSet.add(pObj.category));
-  console.log('categoriesWithSet ===', categoriesWithSet);
+
   // ===========
 
   useEffect(() => {
@@ -46,14 +46,17 @@ export default function ShopPage() {
       });
   };
 
-  function handleFilter(e) {
-    const filteredValue = productArr.filter(
-      (pObj) => pObj.category === e.target.value
-    );
-    setFilterSelect(filteredValue);
-  }
+  // jei turim catFilterValue tai mapinam per prafiltruota prodArr
+  const filtered = catFilterValue
+    ? productArr.filter((pObj) => pObj.category === catFilterValue)
+    : productArr;
+  // jei catFilterValue '' tai per prodArr
 
-  const filtered = filterSelect.length > 0 ? filterSelect : productArr;
+  const arrAfterSearch = searchValue
+    ? filtered.filter((pObj) =>
+        pObj.title.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    : filtered;
 
   return (
     <div className='container'>
@@ -64,23 +67,34 @@ export default function ShopPage() {
       </p>
 
       <fieldset className='grid grid-cols-3 mb-5'>
-        <select
-          name=''
-          id=''
-          onChange={handleFilter}
-          className='block w-full py-2 px-3 border border-gray-400 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-        >
-          <option value={''}>All Categories</option>
-          {allCategories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
+        <label>
+          <span>Select by category</span>
+          <select
+            name=''
+            id=''
+            onChange={(e) => setCatFilterValue(e.target.value)}
+            className='block w-full py-2 px-3 border border-gray-400 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+          >
+            <option value={''}>All Categories</option>
+            {allCategories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <span>Search by title</span>
+          <input
+            onChange={(e) => setSearchValue(e.target.value)}
+            type='search'
+            className='block w-full py-2 px-3 border border-gray-400 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+          />
+        </label>
       </fieldset>
 
       <ul className='grid grid-cols-3 gap-1'>
-        {filtered.map((pObj) => (
+        {arrAfterSearch.map((pObj) => (
           <li key={pObj.id}>
             <ShopListItem item={pObj} onAddToCard={() => cartCtx.add(pObj)} />
           </li>
